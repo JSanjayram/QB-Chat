@@ -1,6 +1,12 @@
 services:
   - type: web
-    name: your-app-name
+    name: youtube-audio-api
     env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "./start.sh"
+    region: india
+    plan: free
+    buildCommand: |
+      apt-get update -y
+      apt-get install -y ffmpeg
+      apt-get install -y ffmpeg-doc
+      pip install -r requirements.txt
+    startCommand: gunicorn -w 4 -k uvicorn.workers.UvicornWorker app:app --timeout 200
