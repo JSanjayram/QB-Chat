@@ -1,1 +1,1 @@
-  web: gunicorn app:app --bind 0.0.0.0:5000
+web: gunicorn -w 4 -k uvicorn.workers.UvicornWorke app:app
